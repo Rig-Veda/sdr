@@ -289,8 +289,24 @@ public class PositionData implements Cloneable {
 	}
 
 	@Override
-	public PositionData clone() {
-		return this.clone();
+	public PositionData clone() throws CloneNotSupportedException {
+		return (PositionData) super.clone();
+	}
+
+	@Override
+	public String toString() {
+		return "PositionData [exoticTradeInd=" + exoticTradeInd + ", timePeriodTypeInd=" + timePeriodTypeInd
+				+ ", putCallInd=" + putCallInd + ", quoteTypeInd=" + quoteTypeInd + ", tradeNum=" + tradeNum
+				+ ", termNum=" + termNum + ", strategyNum=" + strategyNum + ", buyerQuoteDefNum=" + buyerQuoteDefNum
+				+ ", sellerQuoteDefNum=" + sellerQuoteDefNum + ", refPriceQuoteDefNum=" + refPriceQuoteDefNum
+				+ ", locationNum=" + locationNum + ", strikePrice=" + strikePrice + ", spotFX=" + spotFX + ", riskQty="
+				+ riskQty + ", riskDelta=" + riskDelta + ", riskMTM=" + riskMTM + ", mark=" + mark + ", iceProductCd="
+				+ iceProductCd + ", qtyUOMCd=" + qtyUOMCd + ", delivSchCd=" + delivSchCd + ", timePeriodCd="
+				+ timePeriodCd + ", priceCurrCd=" + priceCurrCd + ", priceUOMCd=" + priceUOMCd + ", timezoneCd="
+				+ timezoneCd + ", mktSnapshotCd=" + mktSnapshotCd + ", serviceLevelCd=" + serviceLevelCd
+				+ ", repositoryProductId=" + repositoryProductId + ", pricingStartDate=" + pricingStartDate
+				+ ", pricingEndDate=" + pricingEndDate + ", cobDate=" + cobDate + ", lastModifyDate=" + lastModifyDate
+				+ "]";
 	}
 
 }

@@ -1,13 +1,14 @@
 package com.hyp.sdr.shell;
 
-import java.io.IOException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.inject.AbstractModule;
-import com.hyp.sdr.position.dao.DummyPositionDAO;
-import com.hyp.sdr.position.dao.PositionDAO;
+import com.google.inject.TypeLiteral;
+import com.google.inject.spi.InjectionListener;
+import com.google.inject.spi.TypeEncounter;
+import com.google.inject.spi.TypeListener;
+import com.hyp.sdr.shell.commands.ExecuteSDRProcess;
 
 import asg.cliche.Shell;
 import asg.cliche.ShellFactory;
@@ -22,14 +23,21 @@ public class ShellModule extends AbstractModule {
 		Shell shell = ShellFactory.createConsoleShell("SDR", "SDR-App");
 		bind(Shell.class).toInstance(shell);
 
-		shell.addMainHandler(new ExecuteSDRProcess(), "");
-		try {
-			shell.commandLoop();
-		} catch (IOException e) {
-			logger.error("Error during shell loop", e);
-		}
+		bindListener(AnnotatedClassMatcher.with(ShellCommandHandler.class), new TypeListener() {
 
-		bind(PositionDAO.class).to(DummyPositionDAO.class);
+			@Override
+			public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
+				encounter.register(new InjectionListener<I>() {
+
+					@Override
+					public void afterInjection(I injectee) {
+						shell.addMainHandler(injectee, "");
+					}
+				});
+			}
+		});
+
+		// list of commands
+		bind(ExecuteSDRProcess.class).asEagerSingleton();
 	}
-
 }

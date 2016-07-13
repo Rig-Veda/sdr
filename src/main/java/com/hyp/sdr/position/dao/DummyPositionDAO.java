@@ -11,9 +11,9 @@ import com.hyp.sdr.position.PositionData;
 public class DummyPositionDAO implements PositionDAO {
 
 	@Override
-	public List<PositionData> getPositionData() {
+	public List<PositionData> getPositionData() throws Exception {
 
-		return null;
+		return init();
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class DummyPositionDAO implements PositionDAO {
 		return null;
 	}
 
-	private List<PositionData> init() throws ParseException {
+	private List<PositionData> init() throws ParseException, CloneNotSupportedException {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 		PositionData p = new PositionData();

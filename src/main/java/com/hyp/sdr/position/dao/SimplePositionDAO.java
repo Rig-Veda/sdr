@@ -16,6 +16,9 @@ public class SimplePositionDAO implements PositionDAO {
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
+	/**
+	 * Temp constructor
+	 */
 	public SimplePositionDAO() {
 		logger.debug("Inside SimplePosition constructor");
 	}

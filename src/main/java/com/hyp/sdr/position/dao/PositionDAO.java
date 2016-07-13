@@ -14,8 +14,9 @@ public interface PositionDAO {
 	 * The list of position data according to criteria.
 	 * 
 	 * @return the list of position data
+	 * @throws Exception
 	 */
-	public List<PositionData> getPositionData();
+	public List<PositionData> getPositionData() throws Exception;
 
 	/**
 	 * This method exists to remove the sonar warning about functional
